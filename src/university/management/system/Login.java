@@ -7,7 +7,7 @@ import java.sql.*;
 
 
 
-public class Login extends JFrame implements ActionListener{
+public class Login extends JFrame implements ActionListener {
     
     JTextField usertf , passwordtf;
     JButton login  , back;
@@ -55,6 +55,16 @@ public class Login extends JFrame implements ActionListener{
         add(passwordtf);
         
         
+        
+//         #### add enter functionalty ####
+        passwordtf.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent ae){
+                performedAction();
+            }
+        });
+        
+        
 //        ##### Add login button ####
         login = new JButton("Login");
         login.setBounds(80 , 230 , 100 , 30);
@@ -79,35 +89,89 @@ public class Login extends JFrame implements ActionListener{
         
     }
     
-    public void actionPerformed(ActionEvent ae){
-        if(ae.getSource() == login){
-            Conn c = new Conn();
+    public void performedAction(){
+        conn_fun();
+    }
+    
+    public void conn_fun(){
+        Conn c = new Conn();
             String name = usertf.getText();
-            String password = passwordtf.getText();
-            String query = "select * from login where username = '"+name+"' and password = '"+password+"' ";
+            String pass = passwordtf.getText();
+            String query = "select * from login where username = '"+name+"' and password = '"+pass+"' ";
             
             try{
-                
                 ResultSet rs = c.s.executeQuery(query);
                 if(rs.next()){
                     setVisible(false);
+                    new Project().setVisible(true);
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Invalid Username and Password");
-                    setVisible(false);
+                    JOptionPane.showMessageDialog(null,"Try Again");
+//                    setVisible(false);
                 }
-                
             }catch(Exception e){
-                e.printStackTrace();
+                System.out.println(e);
             }
+//        setVisible(false);
+//        new Dashboard();
+    }
+    
+    
+    
+    
+    public void actionPerformed(ActionEvent ae){
+        if(ae.getSource() == login){
+//            Conn c = new Conn();
+//            String name = usertf.getText();
+//            String password = passwordtf.getText();
+//            String query = "select * from login where username = '"+name+"' and password = '"+password+"' ";
+//            
+//            try{
+//                
+//                ResultSet rs = c.s.executeQuery(query);
+//                if(rs.next()){
+//                    setVisible(false);
+//                    new Project();
+//                }
+//                else{
+//                    JOptionPane.showMessageDialog(null, "Invalid Username and Password");
+//                    setVisible(false);
+//                }
+//                
+//            }catch(Exception e){
+//                e.printStackTrace();
+//            }
+            conn_fun();
         }
         else{
             setVisible(false);
         }
+         
     }
+   
     
+//    ##### Add keyboard enter button functionality ######
+    public class TAdapter extends KeyAdapter{
+        
+        @Override
+        public void keyPressed(KeyEvent e){
+            int key = e.getKeyCode();
+//            String name = nametf.getText();
+            
+            
+            if(key == KeyEvent.VK_ENTER){
+//                open = true;            
+            }
+        }
+    }
+
     
-    public static void main(String[] args){
-        new Login();
+    public static void main(String[] args){SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Login();
+            }
+        });
     }
 }

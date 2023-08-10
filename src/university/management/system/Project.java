@@ -36,6 +36,7 @@ public class Project extends JFrame implements ActionListener{
         
 //        ### Add menu item ###
         JMenuItem newStudentInformation = new JMenuItem("New Student Information");
+        newStudentInformation.addActionListener(this);
         newInformation.add(newStudentInformation);
         
         
@@ -211,6 +212,9 @@ public class Project extends JFrame implements ActionListener{
 //                e.printStackTrace();
 //            }
 //        }
+        else if(msg.equals("New Student Information")){
+            new AddStudent();
+        }
     }
     
     public static void main(String[] args){

@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import com.toedter.calendar.JDateChooser;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AddStudent extends JFrame implements ActionListener{
     
@@ -116,6 +118,7 @@ public class AddStudent extends JFrame implements ActionListener{
         courseCombo = new JComboBox(courseComboValue);
         courseCombo.setBounds(150 , 400 , 200 , 30);
         courseCombo.setFont(new Font("Tahoma" , Font.PLAIN , 18));
+        courseCombo.setSelectedItem(null);
         courseCombo.setBackground(Color.WHITE);
         add(courseCombo);
         
@@ -205,6 +208,7 @@ public class AddStudent extends JFrame implements ActionListener{
         branchCombo = new JComboBox(branchComboValue);
         branchCombo.setBounds(550 , 400 , 200 , 30);
         branchCombo.setFont(new Font("Tahoma" , Font.PLAIN , 18));
+        branchCombo.setSelectedItem(null);
         branchCombo.setBackground(Color.WHITE);
         add(branchCombo);
         
@@ -248,21 +252,109 @@ public class AddStudent extends JFrame implements ActionListener{
             String aadhar = aadharnotf.getText();
             String branch = (String)branchCombo.getSelectedItem();
             
-            try{
-                Conn c = new Conn();
-                
-                String query = "insert into addstudent values('"+name+"','"+fname+"','"+rollno+"','"+emailid+"','"+class10+"','"+class12+"','"+dob+"','"+phone+"','"+aadhar+"','"+address+"','"+course+"','"+branch+"')";
-                
-                c.s.executeUpdate(query);
-                
-                JOptionPane.showMessageDialog(null, "Student Added Successfully");
-                
-            }catch(Exception e){
-                e.printStackTrace();
+            
+//            #### Add validation pattern to all the filed ###
+            Pattern emailpattern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
+            Matcher emailmatcher = emailpattern.matcher(emailid);
+            
+            Pattern phonepattern = Pattern.compile("^[0-9]{10}$");
+            Matcher phonematcher = phonepattern.matcher(phone);
+            
+            Pattern aadharpattern = Pattern.compile("[0-9]{12}$");
+            Matcher aadharmatcher = aadharpattern.matcher(aadhar);
+            
+            Pattern namepattern = Pattern.compile("^[A-Za-z\\s'-]+$");
+            Matcher namematcher = namepattern.matcher(name);
+            
+            Pattern fnamepattern = Pattern.compile("^[A-Za-z\\s'-]+$");
+            Matcher fnamematcher = fnamepattern.matcher(fname);
+            
+            Pattern addresspattern = Pattern.compile("^[A-Za-z0-9A-Za-z\\s'-]+$");
+            Matcher addressmatcher = addresspattern.matcher(address);
+            
+            Pattern class12pattern = Pattern.compile("[0-9]{2,3}$");
+            Matcher class12matcher = class12pattern.matcher(class12);
+            
+            
+            Pattern class10pattern = Pattern.compile("[0-9]{2,3}$");
+            Matcher class10matcher = class10pattern.matcher(class10);
+            
+            
+            
+            
+//            ### validation code ###
+            if(name.equals("") ){
+                JOptionPane.showMessageDialog(null, "Name is Required");
             }
-            
-            
-            
+            else if(!(namematcher.matches())){
+                JOptionPane.showMessageDialog(null, "Enter Correct Name");
+            }
+            else if(fname.equals("") ){
+                JOptionPane.showMessageDialog(null, "Father's name is Required");
+            }
+            else if(!(fnamematcher.matches())){
+                JOptionPane.showMessageDialog(null, "Enter Correct Father Name");
+            }
+            else if(emailid.equals("")){
+                JOptionPane.showMessageDialog(null, "Email Id is Required");
+            }
+            else if(!(emailmatcher.matches())){
+                JOptionPane.showMessageDialog(null, "Enter Correcr Email Id.");
+            }
+            else if(phone.equals("")){
+                JOptionPane.showMessageDialog(null, "Phone number is required.");
+            }
+            else if(!(phonematcher.matches())){
+                JOptionPane.showMessageDialog(null, "Enter Correcr Phone Number ");
+            }
+            else if(address.equals("")){
+                JOptionPane.showMessageDialog(null, "Address is required.");
+            }
+            else if(!(addressmatcher.matches())){
+                JOptionPane.showMessageDialog(null, "Enter Correcr Address ");
+            }
+            else if(class12.equals("")){
+                JOptionPane.showMessageDialog(null, "Class 12 percentage is required.");
+            }
+            else if(!(class12matcher.matches())){
+                JOptionPane.showMessageDialog(null, "Enter Correcr percentage ");
+            }
+            else if(class10.equals("")){
+                JOptionPane.showMessageDialog(null, "class 10 percentage is required.");
+            }
+            else if(!(class10matcher.matches())){
+                JOptionPane.showMessageDialog(null, "Enter Correcr percentage ");
+            }
+            else if(aadhar.equals("")){
+                JOptionPane.showMessageDialog(null, "Aadhar number required.");
+            }
+            else if(!(aadharmatcher.matches())){
+                JOptionPane.showMessageDialog(null, "Enter Correcr aadhar number ");
+            }
+            else if(dob.equals("")){
+                JOptionPane.showMessageDialog(null, "Date of Birth is required.");
+            }
+            else if(course == null ){
+                JOptionPane.showMessageDialog(null, "Course is required.");
+            }
+            else if(branch == null){
+                JOptionPane.showMessageDialog(null, "Branch is required.");
+            }
+            else{
+                try{
+                    Conn c = new Conn();
+                
+                    String query = "insert into addstudent values('"+name+"','"+fname+"','"+rollno+"','"+emailid+"','"+class10+"','"+class12+"','"+dob+"','"+phone+"','"+aadhar+"','"+address+"','"+course+"','"+branch+"')";
+                
+                    c.s.executeUpdate(query);
+                
+                    JOptionPane.showMessageDialog(null, "Student Added Successfully");
+                    setVisible(false);
+                
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
         }
         else{
             setVisible(false);

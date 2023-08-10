@@ -86,10 +86,12 @@ public class Project extends JFrame implements ActionListener{
         
 //        ### Add menu item ###
         JMenuItem studentLeaveDetail = new JMenuItem("Student Leave Deatil");
+        studentLeaveDetail.addActionListener(this);
         leaveDetail.add(studentLeaveDetail);
         
         
         JMenuItem teacherLeaveDetail = new JMenuItem("Teacher Leave Detail");
+        teacherLeaveDetail.addActionListener(this);
         leaveDetail.add(teacherLeaveDetail);
         
 //        ### Add fifth menu###
@@ -231,6 +233,12 @@ public class Project extends JFrame implements ActionListener{
         }
         else if(msg.equals("Teacher Leave")){
             new TeacherLeave();
+        }
+        else if(msg.equals("Student Leave Deatil")){
+            new StudentLeaveDetails();
+        }
+        else if(msg.equals("Teacher Leave Detail")){
+            new TeacherLeaveDetails();
         }
     }
     

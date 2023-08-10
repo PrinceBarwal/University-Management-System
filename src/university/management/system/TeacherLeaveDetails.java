@@ -119,7 +119,7 @@ public class TeacherLeaveDetails extends JFrame implements ActionListener{
             }
         }else if(ae.getSource() == add){
             setVisible(false);
-            new AddTeacher();
+            new TeacherLeave();
         }
         else if(ae.getSource() == update){
             setVisible(false);

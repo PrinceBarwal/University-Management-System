@@ -1,10 +1,18 @@
 package university.management.system;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.util.*;
 import com.toedter.calendar.JDateChooser;
 
-public class AddStudent extends JFrame{
+public class AddStudent extends JFrame implements ActionListener{
+    
+    JTextField nametf , addresstf , emailidtf , class12percent , fnametf , phonetf , class10percent , aadharnotf;
+    JComboBox courseCombo , branchCombo;
+    JDateChooser dateChooser;
+    JButton submit , back;
+    JLabel rolltf;
+    
     
     Random ran = new Random();
     long first4 = Math.abs((ran.nextLong() % 9000L) +1000L);
@@ -30,7 +38,7 @@ public class AddStudent extends JFrame{
         add(name);
         
 //        #### Aadd name text filed###
-        JTextField nametf = new JTextField();
+        nametf = new JTextField();
         nametf.setBounds(150 , 100 , 200 , 30);
         nametf.setFont(new Font("Tahoma" , Font.PLAIN , 18));
         add(nametf);
@@ -44,7 +52,7 @@ public class AddStudent extends JFrame{
         add(rollNo);
         
 //        #### Aadd roll no filed###
-        JLabel rolltf = new JLabel("2023" + first4);
+        rolltf = new JLabel("2023" + first4);
         rolltf.setBounds(150 , 160 , 200 , 30);
         rolltf.setFont(new Font("Tahoma" , Font.BOLD , 18));
         add(rolltf);
@@ -59,7 +67,7 @@ public class AddStudent extends JFrame{
         
                 
 //        #### Aadd address text filed###
-        JTextField addresstf = new JTextField();
+        addresstf = new JTextField();
         addresstf.setBounds(150 , 220 , 200 , 30);
         addresstf.setFont(new Font("Tahoma" , Font.PLAIN , 18));
         add(addresstf);
@@ -74,7 +82,7 @@ public class AddStudent extends JFrame{
         
                 
 //        #### Aadd email text filed###
-        JTextField emailidtf = new JTextField();
+        emailidtf = new JTextField();
         emailidtf.setBounds(150 , 280 , 200 , 30);
         emailidtf.setFont(new Font("Tahoma" , Font.PLAIN , 18));
         add(emailidtf);
@@ -90,7 +98,7 @@ public class AddStudent extends JFrame{
         
                 
 //        #### Aadd class 12 % text filed###
-        JTextField class12percent = new JTextField();
+        class12percent = new JTextField();
         class12percent.setBounds(150 , 340 , 200 , 30);
         class12percent.setFont(new Font("Tahoma" , Font.PLAIN , 18));
         add(class12percent);
@@ -105,7 +113,7 @@ public class AddStudent extends JFrame{
         
 //        Add Combo box for course####
         String[] courseComboValue = {"B.Tech" , "BBA" , "BCA" , "Bsc" , "Msc" , "MBA" , "MCA" , "MCom" , "MA" , "BA"};
-        JComboBox courseCombo = new JComboBox(courseComboValue);
+        courseCombo = new JComboBox(courseComboValue);
         courseCombo.setBounds(150 , 400 , 200 , 30);
         courseCombo.setFont(new Font("Tahoma" , Font.PLAIN , 18));
         courseCombo.setBackground(Color.WHITE);
@@ -122,7 +130,7 @@ public class AddStudent extends JFrame{
         add(fname);
         
 //        #### Aadd name text filed###
-        JTextField fnametf = new JTextField();
+        fnametf = new JTextField();
         fnametf.setBounds(550 , 100 , 200 , 30);
         fnametf.setFont(new Font("Tahoma" , Font.PLAIN , 18));
         add(fnametf);
@@ -136,7 +144,7 @@ public class AddStudent extends JFrame{
         add(dob);
         
 //        ### Add calendar jar file ###
-        JDateChooser dateChooser = new JDateChooser();
+        dateChooser = new JDateChooser();
         dateChooser.setBounds(550 , 160 , 200 , 30);
         dateChooser.setFont(new Font("Tahoma" , Font.PLAIN , 18));
         add(dateChooser);
@@ -151,7 +159,7 @@ public class AddStudent extends JFrame{
         
                 
 //        #### Aadd address text filed###
-        JTextField phonetf = new JTextField();
+        phonetf = new JTextField();
         phonetf.setBounds(550 , 220 , 200 , 30);
         phonetf.setFont(new Font("Tahoma" , Font.PLAIN , 18));
         add(phonetf);
@@ -165,7 +173,7 @@ public class AddStudent extends JFrame{
         
                 
 //        #### Aadd class 10 % text filed###
-        JTextField class10percent = new JTextField();
+        class10percent = new JTextField();
         class10percent.setBounds(550 , 280 , 200 , 30);
         class10percent.setFont(new Font("Tahoma" , Font.PLAIN , 18));
         add(class10percent);
@@ -179,8 +187,8 @@ public class AddStudent extends JFrame{
         add(aadharno);
         
                 
-//        #### Aadd class 12 % text filed###
-        JTextField aadharnotf = new JTextField();
+//        #### Aadd aadhar text filed###
+        aadharnotf = new JTextField();
         aadharnotf.setBounds(550 , 340 , 200 , 30);
         aadharnotf.setFont(new Font("Tahoma" , Font.PLAIN , 18));
         add(aadharnotf);
@@ -194,7 +202,7 @@ public class AddStudent extends JFrame{
         
 //        Add Combo box for course####
         String[] branchComboValue = {"Computer Science" , "Electronic" , "Mechanical" , "Civil" , "IT" };
-        JComboBox branchCombo = new JComboBox(branchComboValue);
+        branchCombo = new JComboBox(branchComboValue);
         branchCombo.setBounds(550 , 400 , 200 , 30);
         branchCombo.setFont(new Font("Tahoma" , Font.PLAIN , 18));
         branchCombo.setBackground(Color.WHITE);
@@ -202,24 +210,63 @@ public class AddStudent extends JFrame{
         
         
 //        ### Add sumbit button ###
-        JButton submit = new JButton("Submit");
+        submit = new JButton("Submit");
         submit.setBounds(250 , 500 , 100 , 30);
         submit.setBackground(Color.BLACK);
         submit.setForeground(Color.WHITE);
         submit.setFont(new Font("Tahoma" , Font.PLAIN , 18));
+        submit.addActionListener(this);
         add(submit);
         
         
 //        ### Add back button ###
-        JButton back = new JButton("Back");
+        back = new JButton("Back");
         back.setBounds(450 , 500 , 100 , 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         back.setFont(new Font("Tahoma" , Font.PLAIN , 18));
+        back.addActionListener(this);
         add(back);
         
         
         setVisible(true);
+    }
+    
+    
+    public void actionPerformed(ActionEvent ae){
+        if(ae.getSource() == submit){
+            String name = nametf.getText();
+            String rollno = rolltf.getText();
+            String address = addresstf.getText();
+            String emailid = emailidtf.getText();
+            String class12 = class12percent.getText();
+            String course = (String)courseCombo.getSelectedItem();
+            String fname = fnametf.getText();
+            String dob = ((JTextField)dateChooser.getDateEditor().getUiComponent()).getText();
+            String phone = phonetf.getText();
+            String class10 = class10percent.getText();
+            String aadhar = aadharnotf.getText();
+            String branch = (String)branchCombo.getSelectedItem();
+            
+            try{
+                Conn c = new Conn();
+                
+                String query = "insert into addstudent values('"+name+"','"+fname+"','"+rollno+"','"+emailid+"','"+class10+"','"+class12+"','"+dob+"','"+phone+"','"+aadhar+"','"+address+"','"+course+"','"+branch+"')";
+                
+                c.s.executeUpdate(query);
+                
+                JOptionPane.showMessageDialog(null, "Student Added Successfully");
+                
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            
+            
+            
+        }
+        else{
+            setVisible(false);
+        }
     }
     
     public static void main(String[] args){

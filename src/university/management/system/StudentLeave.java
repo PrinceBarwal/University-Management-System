@@ -111,18 +111,25 @@ public class StudentLeave extends JFrame implements ActionListener{
             String date = ((JTextField)dateChooser.getDateEditor().getUiComponent()).getText();
             String leaveduration = duration.getSelectedItem();
             
-            try{
-                Conn c = new Conn();
-                String query = "insert into studentleave values('"+rollno+"','"+date+"','"+leaveduration+"')";
-                
-                c.s.executeUpdate(query);
-                
-                JOptionPane.showMessageDialog(null, "Student Leave Added Successfully");
-                setVisible(false);
-                
-            }catch(Exception e){
-                e.printStackTrace();
+            if(date.equals("")){
+                JOptionPane.showMessageDialog(null, "Date is Required");
             }
+            else{
+               try{
+                    Conn c = new Conn();
+                    String query = "insert into studentleave values('"+rollno+"','"+date+"','"+leaveduration+"')";
+                
+                    c.s.executeUpdate(query);
+                
+                    JOptionPane.showMessageDialog(null, "Student Leave Added Successfully");
+                    setVisible(false);
+                
+                }catch(Exception e){
+                    e.printStackTrace();
+                } 
+            }
+            
+            
         }
         else{
             setVisible(false);

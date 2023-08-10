@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/aapche%20net%20beans/University%20Management%20System/src/university/management/system/Login.java</file>
-            <file>file:/D:/aapche%20net%20beans/University%20Management%20System/src/university/management/system/Conn.java</file>
-            <file>file:/D:/aapche%20net%20beans/University%20Management%20System/src/university/management/system/Splash.java</file>
             <file>file:/D:/aapche%20net%20beans/University%20Management%20System/src/university/management/system/Project.java</file>
+            <file>file:/D:/aapche%20net%20beans/University%20Management%20System/src/university/management/system/Login.java</file>
+            <file>file:/D:/aapche%20net%20beans/University%20Management%20System/src/university/management/system/StudentDetail.java</file>
+            <file>file:/D:/aapche%20net%20beans/University%20Management%20System/src/university/management/system/Conn.java</file>
             <file>file:/D:/aapche%20net%20beans/University%20Management%20System/src/university/management/system/AddStudent.java</file>
+            <file>file:/D:/aapche%20net%20beans/University%20Management%20System/src/university/management/system/AddTeacher.java</file>
+            <file>file:/D:/aapche%20net%20beans/University%20Management%20System/src/university/management/system/Splash.java</file>
         </group>
     </open-files>
 </project-private>

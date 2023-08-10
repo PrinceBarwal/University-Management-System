@@ -41,6 +41,7 @@ public class Project extends JFrame implements ActionListener{
         
         
         JMenuItem newTeacherInformation = new JMenuItem("New Teacher Information");
+        newTeacherInformation.addActionListener(this);
         newInformation.add(newTeacherInformation);
         
         
@@ -214,6 +215,9 @@ public class Project extends JFrame implements ActionListener{
 //        }
         else if(msg.equals("New Student Information")){
             new AddStudent();
+        }
+        else if(msg.equals("New Teacher Information")){
+            new AddTeacher();
         }
     }
     

@@ -2,10 +2,14 @@ package university.management.system;
 import java.awt.*;
 import javax.swing.*;
 import java.sql.*;
+import java.awt.event.*;
 
-public class EnterMarks extends JFrame{
+public class EnterMarks extends JFrame implements ActionListener{
     
     Choice ch;
+    JButton submit , cancel;
+    JTextField sub1,sub2,sub3,sub4,sub5,mark1,mark2,mark3,mark4,mark5;
+    JComboBox semesterCombo;
     
     EnterMarks(){
         setSize(1000,650);
@@ -60,7 +64,7 @@ public class EnterMarks extends JFrame{
         add(semester);
         
         String[] semesterValues = {"semester 1","semester 2","semester 3","semester 4","semester 5","semester 6","semester 7","semester 8",};
-        JComboBox semesterCombo = new JComboBox(semesterValues);
+        semesterCombo = new JComboBox(semesterValues);
         semesterCombo.setBounds(260 , 150 , 200 , 30);
         semesterCombo.setFont(new Font("Tahoma" , Font.PLAIN , 20));
         semesterCombo.setBackground(Color.WHITE);
@@ -75,28 +79,28 @@ public class EnterMarks extends JFrame{
         
         
 //        ### add subject text filed ###
-        JTextField sub1 = new JTextField();
+        sub1 = new JTextField();
         sub1.setBounds(30 , 300 , 200 , 30 );
         sub1.setFont(new Font("Tahoma" , Font.PLAIN , 20));
         add(sub1);
         
         
-        JTextField sub2 = new JTextField();
+        sub2 = new JTextField();
         sub2.setBounds(30 , 330 , 200 , 30 );
         sub2.setFont(new Font("Tahoma" , Font.PLAIN , 20));
         add(sub2);
         
-        JTextField sub3 = new JTextField();
+        sub3 = new JTextField();
         sub3.setBounds(30 , 360 , 200 , 30 );
         sub3.setFont(new Font("Tahoma" , Font.PLAIN , 20));
         add(sub3);
         
-        JTextField sub4 = new JTextField();
+        sub4 = new JTextField();
         sub4.setBounds(30 , 390 , 200 , 30 );
         sub4.setFont(new Font("Tahoma" , Font.PLAIN , 20));
         add(sub4);
         
-        JTextField sub5 = new JTextField();
+        sub5 = new JTextField();
         sub5.setBounds(30 , 420 , 200 , 30 );
         sub5.setFont(new Font("Tahoma" , Font.PLAIN , 20));
         add(sub5);
@@ -110,51 +114,91 @@ public class EnterMarks extends JFrame{
         
         
 //        ### add marks text filed ###
-        JTextField mark1 = new JTextField();
+        mark1 = new JTextField();
         mark1.setBounds(230 , 300 , 200 , 30 );
         mark1.setFont(new Font("Tahoma" , Font.PLAIN , 20));
         add(mark1);
         
         
-        JTextField mark2 = new JTextField();
+        mark2 = new JTextField();
         mark2.setBounds(230 , 330 , 200 , 30 );
         mark2.setFont(new Font("Tahoma" , Font.PLAIN , 20));
         add(mark2);
         
-        JTextField mark3 = new JTextField();
+        mark3 = new JTextField();
         mark3.setBounds(230 , 360 , 200 , 30 );
         mark3.setFont(new Font("Tahoma" , Font.PLAIN , 20));
         add(mark3);
         
-        JTextField mark4 = new JTextField();
+        mark4 = new JTextField();
         mark4.setBounds(230 , 390 , 200 , 30 );
         mark4.setFont(new Font("Tahoma" , Font.PLAIN , 20));
         add(mark4);
         
-        JTextField mark5 = new JTextField();
+        mark5 = new JTextField();
         mark5.setBounds(230 , 420 , 200 , 30 );
         mark5.setFont(new Font("Tahoma" , Font.PLAIN , 20));
         add(mark5);
         
 //        ### add submit button ###
-        JButton submit = new JButton("Submit");
+        submit = new JButton("Submit");
         submit.setBounds(60 , 500 , 100 , 30);
         submit.setFont(new Font("Tahoma" , Font.PLAIN , 20));
         submit.setBackground(Color.BLACK);
         submit.setForeground(Color.WHITE);
+        submit.addActionListener(this);
         add(submit);
         
         
 //        ### add cancel button ###
-        JButton cancel = new JButton("Cancel");
+        cancel = new JButton("Cancel");
         cancel.setBounds(260 , 500 , 100 , 30);
         cancel.setFont(new Font("Tahoma" , Font.PLAIN , 20));
         cancel.setBackground(Color.BLACK);
         cancel.setForeground(Color.WHITE);
+        cancel.addActionListener(this);
         add(cancel);
         
         
         setVisible(true);
+    }
+    
+    public void actionPerformed(ActionEvent ae){
+        if(ae.getSource() == submit){
+            String rollno = (String)ch.getSelectedItem();
+            String semesterno = (String)semesterCombo.getSelectedItem();
+            String subject1 = sub1.getText();
+            String subject2 = sub2.getText();
+            String subject3 = sub3.getText();
+            String subject4 = sub4.getText();
+            String subject5 = sub5.getText();
+            String marks1 = mark1.getText();
+            String marks2 = mark2.getText();
+            String marks3 = mark3.getText();
+            String marks4 = mark4.getText();
+            String marks5 = mark5.getText();
+            
+            try{
+                Conn c = new Conn();
+                String query1 = "insert into subject values('"+rollno+"','"+semesterno+"','"+subject1+"','"+subject2+"','"+subject3+"','"+subject4+"','"+subject5+"')";
+                String query2 = "insert into marks values('"+rollno+"','"+semesterno+"','"+marks1+"','"+marks2+"','"+marks3+"','"+marks4+"','"+marks5+"')";
+                
+                c.s.executeUpdate(query1);
+                c.s.executeUpdate(query2);
+                
+                JOptionPane.showMessageDialog(null, "Subject and Marks added Successfully");
+                setVisible(false);
+                
+                
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            
+            
+        }
+        else{
+            setVisible(false);
+        }
     }
     
     public static void main(String[] args){

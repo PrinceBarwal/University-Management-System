@@ -116,11 +116,13 @@ public class Project extends JFrame implements ActionListener{
         mb.add(updateDetail);
         
 //        ### Add menu item ###
-        JMenuItem updateStudentDetail = new JMenuItem("Update Student Detail ");
+        JMenuItem updateStudentDetail = new JMenuItem("Update Student Detail");
+        updateStudentDetail.addActionListener(this);
         updateDetail.add(updateStudentDetail);
         
         
         JMenuItem updateTeacherDetail = new JMenuItem("Update Teacher Detail");
+        updateTeacherDetail.addActionListener(this);
         updateDetail.add(updateTeacherDetail);
         
 //        ### Add seventh menu###
@@ -239,6 +241,12 @@ public class Project extends JFrame implements ActionListener{
         }
         else if(msg.equals("Teacher Leave Detail")){
             new TeacherLeaveDetails();
+        }
+        else if(msg.equals("Update Student Detail")){
+            new UpdateStudent();
+        }
+        else if(msg.equals("Update Teacher Detail")){
+            new UpdateTeacher();
         }
     }
     

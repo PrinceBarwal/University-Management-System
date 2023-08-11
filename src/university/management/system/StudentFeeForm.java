@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 public class StudentFeeForm extends JFrame implements ActionListener{
     
     Choice ch;
-    JLabel nametf , fnametf , branchtf , coursetf;
-    JComboBox semesterCombo;
-    JLabel remaning_amount;
+    JLabel nametf , fnametf , branchtf ;
+    JComboBox semesterCombo , courseCombo;
+    JLabel remaning_amount ;
     JButton update , payfee , back;
     
     StudentFeeForm(){
@@ -82,28 +82,30 @@ public class StudentFeeForm extends JFrame implements ActionListener{
         fnametf.setFont(new Font("Tahoma" , Font.PLAIN , 18));
         add(fnametf);
         
-        
-        //        ### Add name Label###
+//        ### Add course Label###
 
         JLabel course = new JLabel("Course :  ");
         course.setBounds(20 , 280 , 100 , 30);
         course.setFont(new Font("SAN_SARIF" , Font.PLAIN , 20));
         add(course);
         
-//        #### Aadd name text filed###
-        coursetf = new JLabel();
-        coursetf.setBounds(200 , 280 , 200 , 30);
-        coursetf.setFont(new Font("Tahoma" , Font.PLAIN , 18));
-        add(coursetf);
+//        Add Combo box for course####
+        String[] courseComboValue = {"BTech" , "BBA" , "BCA" , "Bsc" , "Msc" , "MBA" , "MCA" , "MCom" , "MA" , "BA"};
+        courseCombo = new JComboBox(courseComboValue);
+        courseCombo.setBounds(200 , 280 , 200 , 30);
+        courseCombo.setFont(new Font("Tahoma" , Font.PLAIN , 18));
+        courseCombo.setSelectedItem(null);
+        courseCombo.setBackground(Color.WHITE);
+        add(courseCombo);
         
-//        ### Add father name Label###
+//        ### Add branch  Label###
 
         JLabel branch = new JLabel("Branch :  ");
         branch.setBounds(20 , 340 ,200 , 30);
         branch.setFont(new Font("SAN_SARIF" , Font.PLAIN , 20));
         add(branch);
         
-//        #### Aadd name text filed###
+//        #### Aadd branch text filed###
         branchtf = new JLabel();
         branchtf.setBounds(200 , 340 , 200 , 30);
         branchtf.setFont(new Font("Tahoma" , Font.PLAIN , 18));
@@ -118,7 +120,6 @@ public class StudentFeeForm extends JFrame implements ActionListener{
             while(rs.next()){
                 nametf.setText(rs.getString("name"));
                 fnametf.setText(rs.getString("father_name"));
-                coursetf.setText(rs.getString("course"));
                 branchtf.setText(rs.getString("branch"));
             }
         }catch(Exception e){
@@ -138,7 +139,6 @@ public class StudentFeeForm extends JFrame implements ActionListener{
             while(rs.next()){
                 nametf.setText(rs.getString("name"));
                 fnametf.setText(rs.getString("father_name"));
-                coursetf.setText(rs.getString("course"));
                 branchtf.setText(rs.getString("branch"));
             }
 
@@ -154,7 +154,7 @@ public class StudentFeeForm extends JFrame implements ActionListener{
         semester.setFont(new Font("Tahoma" , Font.PLAIN , 20));
         add(semester);
         
-        String[] semesterValues = {"semester 1","semester 2","semester 3","semester 4","semester 5","semester 6","semester 7","semester 8",};
+        String[] semesterValues = {"semester1","semester2","semester3","semester4","semester5","semester6","semester7","semester8",};
         semesterCombo = new JComboBox(semesterValues);
         semesterCombo.setBounds(200 , 400 , 200 , 30);
         semesterCombo.setFont(new Font("Tahoma" , Font.PLAIN , 20));
@@ -209,10 +209,37 @@ public class StudentFeeForm extends JFrame implements ActionListener{
     
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource() == update){
+            String course = (String)courseCombo.getSelectedItem();
+            String semester = (String) semesterCombo.getSelectedItem();
             
+            try{
+                Conn c = new Conn();
+                ResultSet rs = c.s.executeQuery("select * from fee where course = '"+course+"' ");
+                while(rs.next()){
+                    remaning_amount.setText(rs.getString(semester));
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
         else if(ae.getSource() == payfee){
+            String rollno = (String)ch.getSelectedItem();
+            String course = (String)courseCombo.getSelectedItem();
+            String semester = (String) semesterCombo.getSelectedItem();
+            String total = remaning_amount.getText();
             
+            try{
+                Conn c = new Conn();
+                String query = "insert into collegefee values('"+rollno+"','"+course+"', '"+semester+"','"+total+"')";
+                
+                c.s.executeUpdate(query);
+                JOptionPane.showMessageDialog(null, "Fee Pay Successfully ");
+                setVisible(false);
+                
+                
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
         else{
             setVisible(false);

@@ -174,6 +174,7 @@ public class Project extends JFrame implements ActionListener{
         
 //        ### Add menu item ###
         JMenuItem aboutUs = new JMenuItem("About Us");
+        aboutUs.addActionListener(this);
         about.add(aboutUs);
         
 
@@ -262,6 +263,9 @@ public class Project extends JFrame implements ActionListener{
         }
         else if(msg.equals("Fee Structure")){
             new FeeStructure();
+        }
+        else if(msg.equals("About Us")){
+            new About();
         }
     }
     

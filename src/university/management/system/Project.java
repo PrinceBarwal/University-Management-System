@@ -140,6 +140,7 @@ public class Project extends JFrame implements ActionListener{
         
         
         JMenuItem studentFeeForm = new JMenuItem("Student Fee Form");
+        studentFeeForm.addActionListener(this);
         feeDetail.add(studentFeeForm);
 
 
@@ -218,13 +219,13 @@ public class Project extends JFrame implements ActionListener{
                 e.printStackTrace();
             }
         }
-//        else if(msg.equals("Web Browser")){
-//            try{
-//                Runtime.getRuntime().exec("chrome.exe");
-//            }catch(Exception e){
-//                e.printStackTrace();
-//            }
-//        }
+        else if(msg.equals("Web Borwser")){
+            try{
+                Runtime.getRuntime().exec("chrome.exe");
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
         else if(msg.equals("New Student Information")){
             new AddStudent();
         }
@@ -266,6 +267,9 @@ public class Project extends JFrame implements ActionListener{
         }
         else if(msg.equals("About Us")){
             new About();
+        }
+        else if(msg.equals("Student Fee Form")){
+            new StudentFeeForm();
         }
     }
     

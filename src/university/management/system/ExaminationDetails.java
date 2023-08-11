@@ -98,36 +98,14 @@ public class ExaminationDetails extends JFrame implements ActionListener{
     }
     
     public void actionPerformed(ActionEvent ae){
-////        if(ae.getSource() == searchbutton){
-////            String rollno = (String)ch.getSelectedItem();
-////            String query = "select * from addstudent where roll_no = '"+rollno+"' ";
-////            
-////            try{
-////                Conn c = new Conn();
-////                ResultSet rs = c.s.executeQuery(query); 
-////                table.setModel(DbUtils.resultSetToTableModel(rs));
-////                
-////            }catch(Exception e){
-////                e.printStackTrace();
-////            }
-////        }
-////        else if(ae.getSource() == print){
-////            try{
-////                table.print();
-////            }catch(Exception e){
-////                e.printStackTrace();
-////            }
-////        }else if(ae.getSource() == add){
-////            setVisible(false);
-////            new AddStudent();
-////        }
-////        else if(ae.getSource() == update){
-////            setVisible(false);
-//////            new Detail
-////        }
-//        else{
-//            setVisible(false);
-//        }
+        if(ae.getSource() == result){
+            new Marks(ch.getText());
+            setVisible(false);
+            
+        }
+        else{
+            setVisible(false);
+        }
         
     }
     

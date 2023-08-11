@@ -102,6 +102,7 @@ public class Project extends JFrame implements ActionListener{
         
 //        ### Add menu item ###
         JMenuItem examinationDetail = new JMenuItem("Examination Details");
+        examinationDetail.addActionListener(this);
         examination.add(examinationDetail);
         
         
@@ -254,6 +255,9 @@ public class Project extends JFrame implements ActionListener{
         }
         else if(msg.equals("Exam Marks")){
             new EnterMarks();
+        }
+        else if(msg.equals("Examination Details")){
+            new ExaminationDetails();
         }
     }
     

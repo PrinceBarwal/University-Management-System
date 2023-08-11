@@ -135,6 +135,7 @@ public class Project extends JFrame implements ActionListener{
         
 //        ### Add menu item ###
         JMenuItem feeStructure = new JMenuItem("Fee Structure");
+        feeStructure.addActionListener(this);
         feeDetail.add(feeStructure);
         
         
@@ -258,6 +259,9 @@ public class Project extends JFrame implements ActionListener{
         }
         else if(msg.equals("Examination Details")){
             new ExaminationDetails();
+        }
+        else if(msg.equals("Fee Structure")){
+            new FeeStructure();
         }
     }
     

@@ -221,7 +221,7 @@ public class Project extends JFrame implements ActionListener{
         }
         else if(msg.equals("Web Borwser")){
             try{
-                Runtime.getRuntime().exec("chrome.exe");
+                Runtime.getRuntime().exec("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe");
             }catch(Exception e){
                 e.printStackTrace();
             }
